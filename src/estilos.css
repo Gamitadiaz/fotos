@@ -1,0 +1,321 @@
+/* Estilo "cuarto oscuro": casi negro con un tinte cálido, como un laboratorio de fotografía,
+   y un solo acento ámbar, como la luz de seguridad. La foto es la protagonista.
+   --tinta es el color del texto; --sobre-acento, el del texto encima de un botón ámbar. */
+:root {
+  --fondo: #0e0c0a;
+  --capa: #181512;
+  --capa-2: #231f1a;
+  --linea: #2c2620;
+  --tinta: #f6efe6;
+  --gris: #857a6d;
+  --suave: #b9ad9f;
+  --acento: #ffb547;
+  --acento-suave: rgb(255 181 71 / 0.14);
+  --sobre-acento: #2a1a02;
+  --mal: #ff6b6b;
+  color-scheme: dark;
+  font-family: "Archivo Variable", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.45;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  color: var(--tinta);
+  background:
+    radial-gradient(110% 50% at 50% -10%, rgb(255 181 71 / 0.08), transparent 60%),
+    var(--fondo);
+  background-attachment: fixed;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.oculto {
+  display: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 560px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) 16px 0;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cabecera h1 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: -0.02em;
+}
+
+.punto {
+  color: var(--acento);
+}
+
+/* ---------- Pantalla vacía ---------- */
+
+.vacio {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding-bottom: 15vh;
+  text-align: center;
+}
+
+.vacio h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-stretch: 120%;
+}
+
+.vacio p {
+  max-width: 30ch;
+  color: var(--suave);
+}
+
+.vacio-lente {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 8px;
+  border: 14px solid var(--capa-2);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 34%, rgb(255 255 255 / 0.7) 0 9%, transparent 10%),
+    radial-gradient(circle, var(--fondo) 0 22%, transparent 23%),
+    radial-gradient(circle at 40% 35%, #ffd27a, var(--acento) 45%, #7a4a0c);
+  box-shadow: 0 0 60px rgb(255 181 71 / 0.25);
+}
+
+/* ---------- Vista previa ---------- */
+
+.marco {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #000;
+}
+
+.lienzo {
+  display: block;
+  max-width: 100%;
+  max-height: 58dvh;
+  touch-action: manipulation;
+  cursor: crosshair;
+}
+
+.boton-original {
+  align-self: center;
+  padding: 6px 14px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: var(--capa);
+  color: var(--suave);
+  font-size: 0.8rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* ---------- Controles ---------- */
+
+.controles {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--linea);
+  border-radius: 20px;
+  background: var(--capa);
+}
+
+.segmentos {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--fondo);
+}
+
+.segmentos button {
+  flex: 1;
+  min-height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--suave);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.segmentos [aria-checked="true"] {
+  background: var(--capa-2);
+  color: var(--acento);
+}
+
+.deslizador {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deslizador-cabeza {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.deslizador output {
+  color: var(--acento);
+  font-variant-numeric: tabular-nums;
+}
+
+.deslizador input {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+}
+
+.deslizador input::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(to right, var(--acento) var(--lleno), var(--capa-2) var(--lleno));
+}
+
+.deslizador input::-moz-range-track {
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(to right, var(--acento) var(--lleno), var(--capa-2) var(--lleno));
+}
+
+.deslizador input::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+  margin-top: -9px;
+  border: 4px solid var(--fondo);
+  border-radius: 50%;
+  background: var(--acento);
+  appearance: none;
+}
+
+.deslizador input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 4px solid var(--fondo);
+  border-radius: 50%;
+  background: var(--acento);
+}
+
+.interruptor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.interruptor input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--acento);
+}
+
+.pista {
+  color: var(--gris);
+  font-size: 0.8rem;
+}
+
+.error {
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgb(255 107 107 / 0.14);
+  color: var(--mal);
+  font-size: 0.9rem;
+}
+
+/* ---------- Botones ---------- */
+
+.boton {
+  min-height: 52px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--acento);
+  color: var(--sobre-acento);
+  font-weight: 800;
+  transition: transform 0.1s, opacity 0.15s;
+}
+
+.boton:active {
+  transform: scale(0.97);
+}
+
+.boton:disabled {
+  opacity: 0.6;
+}
+
+.boton-texto {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--suave);
+  font-weight: 600;
+}
+
+.barra-final {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 -16px;
+  padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--linea);
+  background: rgb(14 12 10 / 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.barra-final .boton {
+  flex: 1;
+  max-width: 220px;
+}
